@@ -1,31 +1,29 @@
 import { Text, SafeAreaView, TextInput, StyleSheet, View, Button, TouchableOpacity } from 'react-native';
-import DatePicker from '../components/DatePicker.js';
+import {Picker} from '@react-native-picker/picker';
 import {useState} from 'react';
 
 
-export default function PersonalInfo({screenstyle}) {
+export default function Food({screenstyle}) {
 
-  const [dob, setDob] = useState(new Date("2000-01-01"));
- 
-  const [showDTP,setShowDTP] = useState(false);
-  function showDatePicker(){
-    setShowDTP(true);
-  }
-  function hideDatePicker(value){
-    setDob(value);
-    setShowDTP(false);
-  }
+  const [snackList, setMovieList] = useState([
+   {'id': 1, "title": "Small Popcorn", "price": 4.95},
+   {'id' : 2, "title": "Medium Popcorn", "price": 6.99}, 
+   {'id': 3, "title": "Large Popcorn", "price": 7.99}
+  ]);
+  const [snackChoice, setSnackChoice] = useState("Small Popcorn")
+
+
   return (
     <View style={screenstyle}>
-      <View style={styles.label}><Text style={styles.label}>Firstname</Text></View>
-      <TextInput style={styles.textbox} placeholder="Enter your first name"/>
-      <Text style={styles.label}>Lastname</Text>
-      <TextInput style={styles.textbox} placeholder="Enter your last name"/>  
-      <DatePicker thisDate={dob} setThisdate={setDob} datelabel="Date of Birth" />
-    </View>
+    <Picker style={styles.textbox}
+    selectedValue={snackChoice}
+    onValueChange={(id.itemValue)} => setSnackChoice{(itemValue)}
+    { snackList.map((snack) => {
+          return <Picker.Item label={snack.name} value={snack.name}/>
+    ))}
+</Picker>
+</View>
   );
-
-
 }
 
 const styles = StyleSheet.create({ 
